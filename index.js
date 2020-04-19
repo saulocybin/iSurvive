@@ -12,7 +12,8 @@ const OrbitDB = require("orbit-db");
   const address = db.address;
   console.log(address);
 
-  
+  await db.put('name', 'hello')
+  console.log(db);
 
   
 })(IPFS, OrbitDB);
