@@ -14,8 +14,9 @@ const Identities = require('orbit-db-identity-provider');
   const orbitdb = await OrbitDB.createInstance(ipfs, {identity: identity});
   
   //create database
-  const db = await orbitdb.keyvalue('first-database');
+  const db = await orbitdb.docs('plantae', { indexBy: 'name' });
   
+  //output tests
   console.log("PUBLIC KEY IDENTITY:");
   console.log(db.identity.publicKey);
 
@@ -23,8 +24,13 @@ const Identities = require('orbit-db-identity-provider');
   const address = db.address;
   console.log(address);
 
-  await db.put('name', 'hello')
+
+  //input test entry
+  const hash = await db.put({_id: 'Specimen01', name: 'testPlant', numberOfPetals: 4});
   console.log(db);
 
+  //test output
+  console.log("OUTPUT ALL RECORDS FROM DB");
+  console.log(db.get(''));
 
 })(IPFS, OrbitDB);
