@@ -13,9 +13,10 @@ const Identities = require('orbit-db-identity-provider');
   //init orbitdb
   const orbitdb = await OrbitDB.createInstance(ipfs, {identity: identity});
   
-  //create database
+  //create/open database
   const db = await orbitdb.docs('plantae', { indexBy: 'name' });
-  
+  await db.load();
+
   //output tests
   console.log("PUBLIC KEY IDENTITY:");
   console.log(db.identity.publicKey);
